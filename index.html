@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Shipper chỉ mình em</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        font-family: sans-serif;
+        background-color: #e8e8e8;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: #ffffff;
+        padding: 10px;
+    }
+
+    nav {
+        float: right;
+        margin-top: 20px;
+    }
+
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    nav ul li a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    main {
+        margin-top: 20px;
+        padding: 10px;
+    }
+
+    section.content {
+        background-color: #ffffff;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+
+    section.banner {
+        background-color: #000;
+        color: #ffffff;
+        padding: 20px;
+        text-align: center;
+    }
+
+    footer {
+        background-color: #ffffff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    footer p {
+        margin-bottom: 0;
+    }
+
+    ul {
+        list-style: none;
+    }
+</style>
+
+<body>
+    <header>
+        <h1>
+            <img src="img/1f620.png" alt="Banner"> Web Shipper chỉ mình em <img src="img/1f620.png" alt="Banner">
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="javascript:void(0);" onclick="openShipperDoAn()">Shipper Đồ Ăn</a></li>
+                <li><a href="javascript:void(0);" onclick="openShipperNguoi()">Shipper Người</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="content">
+            <h2>Nội dung chính</h2>
+            <p>Đây là 1 website khiến em hết mệt mỏi bằng cách ăn :))
+
+            </p>
+        </section>
+
+        <section class="content">
+            <h2>Shipper đồ ăn</h2>
+            <p>Dịch vụ này sẽ giúp em ko cần ra khỏi xóm vẫn no và hạnh phúc </br></br>
+                <label for="code2">Muốn ăn uống gì nè : </label>
+                <input type="text" id="text_1_name">
+                </br>
+                </br>
+                <label for="code2">Gía : </label>
+                <input type="number" id="text_1_value"> đơn vị vnđ
+                </br>
+                <button id="calculateButton">Tính giá</button>
+                <p id="totalPrice">Tổng giá: 0 VNĐ</p>
+            </p>
+        </section>
+
+        <section class="content">
+            <h2>Shipper người</h2>
+            <p>Dịch vụ này sẽ có 1 anh trai dth chở e tới mọi nơi em muốn
+                </br></br>
+                <label for="code2">Đi đâu đây : </label>
+                <input type="text" id="text_2_name">
+                </br>
+            </p>
+        </section>
+
+        <section class="content">
+            <h2>Mã giảm giá </h2>
+            <ul>
+
+                <li>
+                    <input type="checkbox" id="code1">
+                    <label for="code1">Giảm 25% mọi dịch vụ ------- được 10 lần </label>
+                </li>
+                </br>
+                <li>
+                    <input type="checkbox" id="code2">
+                    <label for="code2">Giảm 50% mọi dịch vụ ------- được 3 lần thôi</label>
+                </li>
+
+                </br>
+                <li>
+                    <input type="checkbox" id="code3">
+                    <label for="code3">Giảm 99% mọi dịch vụ ------- cho a ôm 1 cái :) </label>
+                </li>
+
+            </ul>
+        </section>
+
+        <section class="content">
+            <h2>Thanh toán</h2>
+            <p> đ</p>
+        </section>
+
+        <section class="banner">
+            <img src="banner.jpg" alt="Banner">
+        </section>
+    </main>
+    <footer>
+        <p>Liên hệ: <a href="#">hgdang18@gmail.com</a></p>
+        <p>Các liên kết hữu ích:</p>
+        <p href="#">0586997953</p>
+        <p> <img src="img/1f620.png" alt="Banner"> Gọi mọi lúc e cần <img src="img/1f620.png" alt="Banner"> </p>
+    </footer>
+
+    <script>
+        // Hàm mở trang shipper đồ ăn
+        function openShipperDoAn() {
+            window.location.href = "shipper-do-an.html";
+        }
+
+        // Hàm mở trang shipper người
+        function openShipperNguoi() {
+            window.location.href = "shipper-nguoi.html";
+        }
+
+
+          // Hàm tính toán giá cuối cùng
+          function calculatePrice() {
+            // Lấy giá trị từ trường input và checkbox
+            var text1Name = document.getElementById('text_1_name').value;
+            var text1Value = parseFloat(document.getElementById('text_1_value').value);
+            var discountCodes = document.getElementsByClassName('discount-code');
+            var totalPrice = text1Value;
+
+            // Kiểm tra các mã giảm giá và cập nhật giá cuối cùng
+            for (var i = 0; i < discountCodes.length; i++) {
+                if (discountCodes[i].checked) {
+                    var codeValue = parseFloat(discountCodes[i].getAttribute('data-value'));
+                    totalPrice -= (totalPrice * codeValue);
+                }
+            }
+
+            // Cập nhật giá cuối cùng lên giao diện
+            document.getElementById('finalPrice').textContent = totalPrice.toFixed(0) + ' VNĐ';
+        }
+
+        // Đặt lắng nghe sự kiện khi nút "Tính giá" được nhấn
+        document.getElementById('calculateButton').addEventListener('click', calculatePrice);
+
+    </script>
+</body>
+
+</html>
